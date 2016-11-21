@@ -15,36 +15,36 @@ using CSC2110::ListArrayIterator;
 #include <iostream>
 using namespace std;
 
-void deleteCDs(auto_ptr< ListArray<CD> > list)
+void deleteCDs(ListArray<CD>* list)
 {
-   unique_ptr< ListArrayIterator<CD> > iter(list->iterator());
+   ListArrayIterator<CD>* iter = list->iterator();
 
    while(iter->hasNext())
    {
       CD* cd(iter->next());
       delete cd;
    }
-   //delete iter;
+   delete iter;
 }
 
 int main()
 {
-   auto_ptr<ListArray<CD> > cds(CD::readCDs("cds.txt"));
+   ListArray<CD>* cds = CD::readCDs("cds.txt");
    int num_items = cds->size();
    cout << num_items << endl;
 
 while(true)
 {
-   unique_ptr< HeapSkew<CD> > sh(new HeapSkew<CD>(&CD::compare_items));
+   HeapSkew<CD>* sh = new HeapSkew<CD>(&CD::compare_items);
 
-   unique_ptr< ListArrayIterator<CD> > iter(cds->iterator());
+   ListArrayIterator<CD>* iter = cds->iterator();
    
    while(iter->hasNext())
    {
       CD* cd = (iter->next());
       sh->heapInsert(cd);
    }
-   //delete iter;
+   delete iter;
 
    while(!(sh->heapIsEmpty()))
    {
@@ -52,10 +52,10 @@ while(true)
       //cd->displayCD();
    }
 
-   //delete sh;
+   delete sh;
 }
    deleteCDs(cds);
-   //delete cds;
+   delete cds;
 
    return 0;
 }

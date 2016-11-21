@@ -1,5 +1,5 @@
 AutomatedMakefile = am
-CC = g++ -std=c++11
+CC = g++
 CXXFLAGS = -Wno-deprecated-declarations -g -O0
 
 

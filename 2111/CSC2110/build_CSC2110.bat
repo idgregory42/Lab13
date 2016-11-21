@@ -24,7 +24,6 @@ g++ %CXXFLAGS% -c Keyboard.cpp
 g++ %CXXFLAGS% -c Matrix.cpp
 g++ %CXXFLAGS% -c Poly.cpp
 g++ %CXXFLAGS% -c CD.cpp
-pause
 g++ %CXXFLAGS% -c Song.cpp
 g++ %CXXFLAGS% -c Integer.cpp
 g++ %CXXFLAGS% -c Double.cpp
