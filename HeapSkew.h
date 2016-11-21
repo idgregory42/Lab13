@@ -1,6 +1,3 @@
-#if !defined (NULL)
-   #define NULL 0
-#endif
 #if !defined HEAPSKEW_H
 #define HEAPSKEW_H
 
@@ -57,66 +54,67 @@ template < class T >
 BinaryTree<T>* HeapSkew<T>::merge(BinaryTree<T>* left, BinaryTree<T>* right)
 {
   //DO THIS
-  if(left->isEmpty()) return right;
-  if(right->isEmpty()) return left;
+  if(left->isEmpty())
+  {
+	  delete left;  //for memory usage
+	  return right;
+  }
+
+  if(right->isEmpty())
+  {
+	  delete right; //for memory usage
+	  return left;
+  }  
   
+  //gets left and right root for compare
   T* left_root  = left->getRootItem();
   T* right_root = right->getRootItem();
   
   int comp = (*compare_items)(left_root, right_root);
   
-  if(comp < 0)
-  {
-    merge(right, left);
-  }
+  if(comp < 0) return merge(right, left);  //swap with reverse merge
   
-  BinaryTree<T>* lefts_left = left->detachLeftSubtree();
+  //get left's left and right
+  BinaryTree<T>* lefts_left = left->detachLeftSubtree();   
   BinaryTree<T>* lefts_right = left->detachRightSubtree();
+  
+  left->attachRightSubtree(lefts_left);  //attach left's left to left's right
+  delete lefts_left;  //for memory usage
 
-  if(lefts_left->isEmpty()) 
+  if(lefts_right->isEmpty())
   {
-	  lefts_left->attachLeftSubtree(right);
+	  left->attachLeftSubtree(right);  //attach right to left's left
   }
   else
   {
-	  BinaryTree<T>* merge_trees = merge(lefts_right, right);
-	  left->attachLeftSubtree(merge_trees);
+	  left->attachLeftSubtree(merge(lefts_right, right));  //attach binary tree to left's left
   }
+    
   
-  if(lefts_right->isEmpty())
-  {
-	  lefts_left->attachRightSubtree(right);
-  }
+  delete lefts_right; //for memory usage
+  return left;
 }
 
 template < class T >
 void HeapSkew<T>::heapInsert(T* item)
 {
    //DO THIS (calls merge, should be short)
-   if(item == NULL) return;
-   
-   BinaryTree<T>* left  = bt;
    BinaryTree<T>* right = new BinaryTree<T>(item);
-   
+   BinaryTree<T>* left  = bt;
    bt = merge(left, right);
-   left->destroy();
-   right->destroy();
-   sze++
+   sze++;
 }
 
 template < class T >
 T* HeapSkew<T>::heapRemove()
 {
    //DO THIS (calls merge, should be short)
+   T* root_item = bt->getRootItem();
    BinaryTree<T>* left  = bt->detachLeftSubtree();
    BinaryTree<T>* right = bt->detachRightSubtree();
-   T* root_item = bt->getRootItem();
    
-   bt->destroy();
-   
+   delete bt; //for memory usage
    bt = merge(left, right);
-   left->destroy();
-   right->destroy();
    sze--;
    return root_item;
 }
