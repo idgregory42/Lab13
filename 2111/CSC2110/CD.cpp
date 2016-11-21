@@ -5,6 +5,7 @@
 #include "Tokens.h"
 using namespace CSC2110;
 
+#include <memory>
 #include <iostream>
 using namespace std;
 

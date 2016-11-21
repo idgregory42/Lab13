@@ -1,6 +1,7 @@
 AutomatedMakefile = am
-CC = g++
+CC = g++ -std=c++11
 CXXFLAGS = -Wno-deprecated-declarations -g -O0
+
 
 PROJECT_PATH = $(PROJECT_DIR)
 GUI_PATH = $(DRIVE_LETTER)/TDM-GCC-64/wxWidgets-3.1.0

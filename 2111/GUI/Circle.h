@@ -11,7 +11,7 @@ class Circle
       int radius;
       Color* color;
       CSC2110::String* text;
-      static const float PI2 = 6.283854;
+      static constexpr float PI2 = 6.283854;
 
    public:
       Circle(Color* color, int radius, CSC2110::String* text);

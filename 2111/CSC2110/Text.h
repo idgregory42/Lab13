@@ -1,6 +1,9 @@
 #if !defined STRING_H
 #define STRING_H
 
+#include <memory>
+using namespace std;
+
 namespace CSC2110
 {
 class String

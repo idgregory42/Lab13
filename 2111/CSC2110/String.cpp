@@ -10,7 +10,7 @@ using namespace std;
 String::String(const char* char_array)
 {
    sz = strlen(char_array);
-   char* text = new char[sz+1];
+   char* text(new char[sz+1]);
    for (int i = 0; i < sz; i++)
    {
       text[i] = char_array[i];

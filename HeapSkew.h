@@ -4,6 +4,9 @@
 #include "BinaryTree.h"
 #include "wx/wx.h"
 
+#include <memory>
+using namespace std;
+
 template < class T >
 class HeapSkew : public Drawable
 {
