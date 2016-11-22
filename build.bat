@@ -1,6 +1,8 @@
 @echo off
 cls
 
+del HeapDriver.o DrawHeapSkew.o
+
 ::Set drive letter if no args given
 if [%1] == [] goto noArgs
 goto yesArgs

@@ -5,13 +5,11 @@
 using CSC2110::CD;
 #include "Text.h"
 using CSC2110::String;
-using CSC2110::String;
 #include "ListArray.h"
 using CSC2110::ListArray;
 #include "ListArrayIterator.h"
 using CSC2110::ListArrayIterator;
 
-#include <memory>
 #include <iostream>
 using namespace std;
 
@@ -21,7 +19,7 @@ void deleteCDs(ListArray<CD>* list)
 
    while(iter->hasNext())
    {
-      CD* cd(iter->next());
+      CD* cd = iter->next();
       delete cd;
    }
    delete iter;
@@ -41,7 +39,7 @@ while(true)
    
    while(iter->hasNext())
    {
-      CD* cd = (iter->next());
+      CD* cd = iter->next();
       sh->heapInsert(cd);
    }
    delete iter;
